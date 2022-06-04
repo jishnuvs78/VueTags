@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+
+    <div id="app">
+        <vue-tags-input
+          v-model="tag"
+          :tags="tags"
+          :autocomplete-items="filteredItems"
+          @tags-changed="newTags => tags = newTags"
+        />
+    </div>
+
+    <!-- Load Vue.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+    <!-- Load Vue-Tabs -->
+    <script src="https://unpkg.com/@johmun/vue-tags-input/dist/vue-tags-input.js"></script>
+
+
+    <!-- YOUR APPLICATION JS FILE -->
+    <script type="text/javascript">
+        new Vue({
+            el: "#app",
+            data() {
+              return {
+                tag: '',
+                tags: [],
+                autocompleteItems: [{
+                  text: 'Spain',
+                }, {
+                  text: 'France',
+                }, {
+                  text: 'USA',
+                }, {
+                  text: 'Germany',
+                }, {
+                  text: 'China',
+                }],
+              };
+            },
+            computed: {
+              filteredItems() {
+                return this.autocompleteItems.filter(i => {
+                  return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
+                });
+              },
+            },
+        });
+    </script>
+
+</body>
+</html>
